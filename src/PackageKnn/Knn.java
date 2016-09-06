@@ -1,10 +1,21 @@
 
 /*Algoritmo KNN 
+ Esse algoritimo determina a qual classe determinado elemento pertence baseado 
+ nos seus vizinhos mais proximos.
+ A classe que tiver maior quantidade de representantes com vizinhos do elemento de teste define o elemento. 
+ Cada elemento possui uma coordenadas(caracteristicas) de um campo mutildimencional e seu tipo.
+ exemplo " 5.1,3.5,1.4,0.2,Iris-setosa ".
+ Esse algoritimo ler um arquivo contendo varios elementos, separa esse elementos em grupos de teste e de treinamento
+ onde os elemntos do grupo de teste serão os elemntos ao qual desejamos classificar e os de treimentos serão os vizinhos.
+ e ao final compara o resultado obitdo atraves do algorimo com a resposta e calcula a porcentagem de acerto.
 
-
-*
+ A variavel K define quantos vizinhos serão considerados.
+ uma conclusão chegada com esse trabalho é que quanto maior o for K maior é o
+ nivel de ruido nos dados logo a media da porcentagem de acerto cai.
 *
 */
+
+
 package PackageKnn;
 import java.io.*;
 import java.util.Collections;
@@ -20,7 +31,7 @@ public class Knn {
 		static ArrayList< Dado > arrayListTreinamento = new ArrayList< Dado >();
 		static ArrayList< Dado > arraListTeste= new ArrayList< Dado >();
 		static int QuantidadeDeatributos = 4;
-		static int k = 12;//Usado na linha 234
+		static int k = 12;//Define a quantidade de visinhos que será considerados para a verificação
 		
 		//Objeto de dados 
 		static class Dado{
@@ -66,7 +77,7 @@ public class Knn {
 		
 		
 		//Preenche um array do tipo dado utilizando aquivos
-		static void separarDadosTesteEDesconecidos(ArrayList<Dado>arrayListTreinamento, ArrayList<Dado>arrayListTeste, ArrayList<Dado>arrayListdados){
+		static void separarDadosTesteETreinamento(ArrayList<Dado>arrayListTreinamento, ArrayList<Dado>arrayListTeste, ArrayList<Dado>arrayListdados){
 					
 				//Define o tamanho do arrayListTreinamento neste caso 67% do tamanho arrayListDados
 				int treinamento = (67 * arrayListdados.size() ) / 100;
@@ -107,36 +118,12 @@ public class Knn {
 						
 				}
 					
-					
 				
-					
-				/*	//Impressoes de teste
-					
-					System.out.println("");
-					System.out.println("DADOS PARA TREINAMENTO");
-					System.out.println("");
-					
-					for(int i=0; i<arrayListTreinamento.size(); i++){
-					System.out.println(arrayListTreinamento.get(i).getClasse()+","+ arrayListTreinamento.get(i).atributos[0]+","+ arrayListTreinamento.get(i).atributos[1]+","+ arrayListTreinamento.get(i).atributos[2]+","+ arrayListTreinamento.get(i).atributos[3]);
-					}
-					
-					System.out.println("");
-					System.out.println("DADOS PARA TESTE");
-					System.out.println("");
-					
-					for(int i=0; i<arrayListTeste.size(); i++){
-							System.out.println(arrayListTeste.get(i).getClasse()+","+ arrayListTeste.get(i).atributos[0]+","+ arrayListTeste.get(i).atributos[1]+","+ arrayListTeste.get(i).atributos[2]+","+ arrayListTeste.get(i).atributos[3]);
-					}
-					
-			*/
 					
 		}//Fim  separarDadosTesteEDesconecidos
-	
-	
-					
-				
-				
-				
+		
+		
+		
 		//Preencher um array do tipo dado utilizando arquivo
 		static void PreencherArrayDeDados( ArrayList<Dado>arrayListDados){
 				
@@ -165,9 +152,9 @@ public class Knn {
 								aux.classe = vetorDeString[4];
 								arrayListDados.add(aux);
 			        
-								//System.out.println(arrayListDados.get(i).getClasse()+","+ arrayListDados.get(i).atributos[0]+","+ arrayListDados.get(i).atributos[1]+","+ arrayListDados.get(i).atributos[2]+","+ arrayListDados.get(i).atributos[3]);
+						
 					
-							//	i++;
+						
 			       
 								linha = lerArq.readLine(); // lê da segunda até a última linha
 						}
@@ -180,13 +167,12 @@ public class Knn {
 
 			    
 			  }//Fim PreencherArrayDeDados
-	
 		
 		
-
-	
-		//Recebe dois array do tipo Dado, um para teste e outro desconhecido 1 calcula distancia, 2 ordena pela distacia, 3 seleciona k  primeiros,
-		//4 faz contagem por classe, 5 defiene a classe do idividuo  
+		
+		/*Recebe dois array do tipo Dado, um para teste e outro treinamento em seguida calcula distancia, ordena pela distacia, seleciona k  primeiros,
+		faz contagem por classe , defiene a classe do idividuo , verifica a resposta e por fim calcula a porcentagem de acertos  
+		*/
 		public static void classificar(ArrayList<Dado>arrayListTeste, ArrayList<Dado>arraylistTreinamento){
 		
 		//Variavel utilizada para contar a porcentagem de acerto
@@ -291,17 +277,13 @@ public class Knn {
 		
 		public static void main(String[] args){
 				PreencherArrayDeDados(arrayListTodosDados);
-				separarDadosTesteEDesconecidos( arrayListTreinamento, arraListTeste, arrayListTodosDados);			
+				separarDadosTesteETreinamento( arrayListTreinamento, arraListTeste, arrayListTodosDados);			
 				classificar(arraListTeste,  arrayListTreinamento);
 				int [][]matriz= new int[6][6];
 				
-				Random r = new Random();
+
 				
-				 System.out.println(  r.nextInt(2) ) ;
-				
-				 if("F"== "F"){
-				 System.out.println( 2*(-1) ) ;
-				 }
+			
 		}	
 
 }
