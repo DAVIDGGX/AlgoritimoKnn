@@ -1,6 +1,7 @@
 # AlgoritimoKnn
+Trabalho prático da diciplina de inteligência artificial
 Algoritmo que classifica elementos segundo seus vizinhos mais proximos
-
+ 
  Esse algoritimo determina a qual tipo determinado elemento pertence baseado 
  nos seus vizinhos mais proximos.
  Cada elemento possui uma coordenadas(caracteristicas) de um campo mutildimencional e seu tipo.
